@@ -10,7 +10,7 @@ Table of contents:
 
 - [raspberry-pi-temperature-sensor](#raspberry-pi-temperature-sensor)
   - [Scripts](#scripts)
-    - [`read-temperature-sensor.py`](#read-temperature-sensorpy)
+    - [`read_temperature_sensor.py`](#read_temperature_sensorpy)
 
 <!-- /code_chunk_output -->
 
@@ -18,6 +18,6 @@ Table of contents:
 
 All scripts for this project reside in `/scripts`.
 
-### `read-temperature-sensor.py`
+### `read_temperature_sensor.py`
 
 This is the script responsible for reading the temperature sensor. Currently, it only works with a single sensor, but could easily be modified to read multiple sensors.
