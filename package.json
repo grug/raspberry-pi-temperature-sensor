@@ -5,7 +5,11 @@
   "repository": "git@github.com:grug/raspberry-pi-temperature-sensor.git",
   "author": "Dave Cooper <dave@davecooper.org>",
   "license": "MIT",
+  "scripts": {
+    "upload": "ts-node scripts/upload-temperature-readings"
+  },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.3"
   }

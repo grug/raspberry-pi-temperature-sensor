@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 import os
+import csv
+import time
+import datetime
 
 
 def sensor():
@@ -31,9 +34,22 @@ def kill():
     quit()
 
 
+def write_to_file(reading):
+    filename = time.strftime("%Y_%m_%d")
+
+    with open('./data/{}.csv'.format(filename), mode='a') as csv_file:
+        fieldnames = ['date', 'temperature']
+
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow(
+            {'date': datetime.datetime.now().isoformat(), 'temperature': reading})
+
+
 if __name__ == '__main__':
     try:
-        serialNum = sensor()
-        loop(serialNum)
+        # serialNum = sensor()
+        # reading = read(serialNum)
+        write_to_file(5)
     except KeyboardInterrupt:
         kill()
