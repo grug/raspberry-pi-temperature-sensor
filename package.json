@@ -9,8 +9,16 @@
     "upload": "ts-node scripts/upload-temperature-readings"
   },
   "dependencies": {
+    "csvtojson": "^2.0.10",
+    "date-fns": "^2.14.0",
+    "del": "^5.1.0",
     "dotenv": "^8.2.0",
+    "mysql": "^2.18.1",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.3"
+  },
+  "devDependencies": {
+    "@types/mysql": "^2.15.13",
+    "@types/node": "^14.0.10"
   }
 }

@@ -41,7 +41,8 @@ def write_to_file(reading):
         fieldnames = ['date', 'temperature']
 
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writeheader()
+        if csv_file.tell() == 0:
+            writer.writeheader()
         writer.writerow(
             {'date': datetime.datetime.now().isoformat(), 'temperature': reading})
 
