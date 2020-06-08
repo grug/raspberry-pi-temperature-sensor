@@ -12,7 +12,7 @@ async function main() {
 
   const { date, temperature } = fileContents[0];
 
-  const query = "INSERT INTO ?? VALUES(?, ?)";
+  const query = "INSERT INTO ?? (read_time, temperature) VALUES(?, ?)";
   const inserts = ["temperature_reads", date, temperature];
   const preparedQuery = fmt(query, inserts);
 
