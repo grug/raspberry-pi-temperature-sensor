@@ -51,7 +51,6 @@ if __name__ == '__main__':
     try:
         serialNum = sensor()
         reading = read(serialNum)
-        print(reading)
-        # write_to_file(18)
+        write_to_file(reading)
     except KeyboardInterrupt:
         kill()
