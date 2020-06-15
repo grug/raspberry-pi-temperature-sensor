@@ -34,7 +34,7 @@ if __name__ == '__main__':
     try:
         water = read('28-011929d17635')
         air = read('28-01192a24e7dd')
-        write_to_file(1, 'water')
-        write_to_file(2, 'air')
+        write_to_file(water, 'water')
+        write_to_file(air, 'air')
     except KeyboardInterrupt:
         quit()
