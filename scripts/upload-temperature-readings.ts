@@ -4,16 +4,17 @@ import csv from "csvtojson";
 import format from "date-fns/format";
 import del from "del";
 
-async function main() {
-  config();
+type ProbeType = "water" | "air";
 
-  const fileName = `${format(new Date(), "yyyy_MM_dd")}.csv`;
+async function processFile(probe: ProbeType) {
+  const fileName = `${format(new Date(), "yyyy_MM_dd")}-${probe}.csv`;
   const fileContents = await csv().fromFile(`./data/${fileName}`);
 
   const { date, temperature } = fileContents[0];
 
-  const query = "INSERT INTO ?? (read_time, temperature) VALUES(?, ?)";
-  const inserts = ["temperature_reads", date, temperature];
+  const query =
+    "INSERT INTO ?? (read_time, temperature, probe) VALUES(?, ?, ?)";
+  const inserts = ["temperature_reads", date, temperature, probe];
   const preparedQuery = fmt(query, inserts);
 
   const connection = createConnection({
@@ -23,15 +24,22 @@ async function main() {
     database: process.env.DB_NAME,
   });
 
-  connection.query(preparedQuery, async (error, results) => {
+  connection.query(preparedQuery, async (error, _) => {
     if (error) {
       console.log(error);
     }
   });
 
-  await del(["./data/*.*"]);
-
   connection.end();
+}
+
+async function main() {
+  config();
+
+  await processFile("water");
+  await processFile("air");
+
+  await del(["./data/*.*"]);
 }
 
 main();

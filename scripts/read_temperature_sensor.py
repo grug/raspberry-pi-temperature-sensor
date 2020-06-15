@@ -5,13 +5,6 @@ import time
 import datetime
 
 
-def sensor():
-    for i in os.listdir('/sys/bus/w1/devices'):
-        if i != 'w1_bus_master1':
-            ds18b20 = i
-    return ds18b20
-
-
 def read(ds18b20):
     location = '/sys/bus/w1/devices/' + ds18b20 + '/w1_slave'
     tfile = open(location)
@@ -24,20 +17,10 @@ def read(ds18b20):
     return celsius
 
 
-def loop(ds18b20):
-    while True:
-        if read(ds18b20) != None:
-            print("Current temperature : %0.3f C" % read(ds18b20))
-
-
-def kill():
-    quit()
-
-
-def write_to_file(reading):
+def write_to_file(reading, probe):
     filename = time.strftime("%Y_%m_%d")
 
-    with open('./data/{}.csv'.format(filename), mode='a') as csv_file:
+    with open('./data/{}-{}.csv'.format(filename, probe), mode='a') as csv_file:
         fieldnames = ['date', 'temperature']
 
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
@@ -49,8 +32,9 @@ def write_to_file(reading):
 
 if __name__ == '__main__':
     try:
-        serialNum = sensor()
-        reading = read(serialNum)
-        write_to_file(reading)
+        water = read('28-011929d17635')
+        air = read('28-01192a24e7dd')
+        write_to_file(1, 'water')
+        write_to_file(2, 'air')
     except KeyboardInterrupt:
-        kill()
+        quit()
