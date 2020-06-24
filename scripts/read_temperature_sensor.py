@@ -37,6 +37,6 @@ if __name__ == '__main__':
         water_deep = read('28-011929d17635')
         write_to_file(water_shallow, 'water_shallow')
         write_to_file(air, 'air')
-        write_to_file(air, 'water_deep')
+        write_to_file(water_deep, 'water_deep')
     except KeyboardInterrupt:
         quit()
