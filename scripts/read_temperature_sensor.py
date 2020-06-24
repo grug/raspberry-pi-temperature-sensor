@@ -32,9 +32,11 @@ def write_to_file(reading, probe):
 
 if __name__ == '__main__':
     try:
-        water = read('28-011450496aaa')
+        water_shallow = read('28-011450496aaa')
         air = read('28-01145026caaa')
-        write_to_file(water, 'water')
+        water_deep = read('28-011929d17635')
+        write_to_file(water_shallow, 'water_shallow')
         write_to_file(air, 'air')
+        write_to_file(air, 'water_deep')
     except KeyboardInterrupt:
         quit()

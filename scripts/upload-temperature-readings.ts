@@ -4,7 +4,7 @@ import csv from "csvtojson";
 import format from "date-fns/format";
 import del from "del";
 
-type ProbeType = "water" | "air";
+type ProbeType = "water_shallow" | "air" | "water_deep";
 
 async function processFile(probe: ProbeType) {
   const fileName = `${format(new Date(), "yyyy_MM_dd")}-${probe}.csv`;
@@ -36,7 +36,8 @@ async function processFile(probe: ProbeType) {
 async function main() {
   config();
 
-  await processFile("water");
+  await processFile("water_shallow");
+  await processFile("water_deep");
   await processFile("air");
 
   await del(["./data/*.*"]);
